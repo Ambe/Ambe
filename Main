@@ -1,0 +1,357 @@
+package  {
+  import flash.display.Sprite;
+	import flash.events.Event;
+	import fl.controls.ColorPicker;
+	import fl.events.ColorPickerEvent;
+	import flash.printing.PrintJob;
+	
+	import com.greensock.*;
+	import com.greensock.easing.*;
+	import com.greensock.plugins.*;
+	
+	
+	public class Main extends Sprite{
+	
+		private const TRANSITION_SPEED:Number = .5;//How fast in seconds to fade in the colors
+		private var _robber:Robber;
+		private var _hatPicker:CustomColorPicker;
+		private var _hairPicker:CustomColorPicker;
+		private var _bootsPicker:CustomColorPicker;
+		private var _innereyePicker:CustomColorPicker;
+		private var _headandneckPicker:CustomColorPicker;
+		private var _rightarmPicker:CustomColorPicker;
+		private var _righthandPicker:CustomColorPicker;
+		private var _beltPicker:CustomColorPicker;
+		private var _centerofbeltPicker:CustomColorPicker;
+		private var _moneybagPicker:CustomColorPicker;
+		private var _bootPicker:CustomColorPicker;
+		private var _leftarmPicker:CustomColorPicker;
+		private var _lefthandPicker:CustomColorPicker;
+		private var _jeansPicker:CustomColorPicker;
+		private var _blackmPicker:CustomColorPicker;
+		private var _shirtPicker:CustomColorPicker;
+		private var _centerofmaskPicker:CustomColorPicker;
+		private var _mouthPicker:CustomColorPicker;
+		private var _whiteeyePicker:CustomColorPicker;
+		private var _printBtn:PrintBtn;
+		
+		
+		public function Main() {
+			TweenPlugin.activate([TintPlugin]);
+			
+			addEventListener(Event.ADDED_TO_STAGE, init);
+		}
+		
+		private function init(event:Event):void
+		{
+			removeEventListener(Event.ADDED_TO_STAGE, init);
+			
+			//init
+			_robber = new Robber();
+			_hatPicker = new CustomColorPicker();
+			_hairPicker = new CustomColorPicker();
+			_bootsPicker = new CustomColorPicker();
+			_innereyePicker = new CustomColorPicker();
+			_headandneckPicker = new CustomColorPicker();
+			_rightarmPicker = new CustomColorPicker();
+			_righthandPicker = new CustomColorPicker();
+			_beltPicker = new CustomColorPicker();
+			_centerofbeltPicker = new CustomColorPicker();
+			_moneybagPicker = new CustomColorPicker();
+			_bootsPicker = new CustomColorPicker();
+			_leftarmPicker = new CustomColorPicker();
+			_lefthandPicker = new CustomColorPicker();
+			_jeansPicker = new CustomColorPicker();
+			_blackmPicker = new CustomColorPicker();
+			_shirtPicker = new CustomColorPicker();
+			_centerofmaskPicker = new CustomColorPicker();
+			_mouthPicker = new CustomColorPicker();
+			_whiteeyePicker = new CustomColorPicker();
+			//_printBtn = new PrintBtn();
+			
+			//initial states
+			_robber.x = 208;
+			_robber.y = 286;
+			
+			_printBtn.x = 280;
+			_printBtn.y = 35;
+			_printBtn.buttonMode = true;
+			_printBtn.addEventListener(MouseEvent.CLICK, printScene);
+			
+			//// hat ///
+			_hatPicker.titleText.text = "Hat Picker";
+			_hatPicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changeHatColor);
+			_hatPicker.x = stage.stageWidth - _hatPicker.width - 100;
+			_hatPicker.y = 10;
+			
+			//// hat ///
+			
+			//// hair ///
+			_hairPicker.titleText.text = "Hair Picker";
+			_hairPicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changeHairColor);
+			_hairPicker.x = stage.stageWidth - _hairPicker.width - 100;
+			_hairPicker.y = 40;
+			//// hair ///
+			
+			
+			//// innereye ///
+			_innereyePicker.titleText.text = "Inner Eye Picker";
+			_innereyePicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changeinnereyeColor);
+			_innereyePicker.x = stage.stageWidth - _innereyePicker.width - 100;
+			_innereyePicker.y = 70;
+			//// innereye ///
+			
+			//// headandneck ///
+			_headandneckPicker.titleText.text = "Head and Neck Picker";
+			_headandneckPicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changeheadandneckColor);
+			_headandneckPicker.x = stage.stageWidth - _headandneckPicker.width - 100;
+			_headandneckPicker.y = 100;
+			//// headandneck ///
+			
+			//// rightarm ///
+			_rightarmPicker.titleText.text = "Right Arm Picker";
+			_rightarmPicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changerightarmColor);
+			_rightarmPicker.x = stage.stageWidth - _rightarmPicker.width - 100;
+			_rightarmPicker.y = 130;
+			//// rightarm ///
+			
+						
+			//// righthand ///
+			_righthandPicker.titleText.text = "Right Hand Picker";
+			_righthandPicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changerighthandColor);
+			_righthandPicker.x = stage.stageWidth - _righthandPicker.width - 100;
+			_righthandPicker.y = 160;
+			//// righthand ///
+
+			//// belt ///
+			_beltPicker.titleText.text = "Belt Picker";
+			_beltPicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changebeltColor);
+			_beltPicker.x = stage.stageWidth - _beltPicker.width - 100;
+			_beltPicker.y = 190;
+			//// belt ///
+			
+			//// center of belt ///
+			_centerofbeltPicker.titleText.text = "Belt Center Picker";
+			_centerofbeltPicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changecenterofbeltColor);
+			_centerofbeltPicker.x = stage.stageWidth - _centerofbeltPicker.width - 100;
+			_centerofbeltPicker.y = 220;
+			//// center of belt ///
+			
+			//// money bag ///
+			_moneybagPicker.titleText.text = "Money Bag Picker";
+			_moneybagPicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changemoneybagColor);
+			_moneybagPicker.x = stage.stageWidth - _moneybagPicker.width - 100;
+			_moneybagPicker.y = 260;
+			//// money bag ///
+			
+			//// Boots///
+			_bootsPicker.titleText.text = "Boots Picker";
+			_bootsPicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changebootsColor);
+			_bootsPicker.x = stage.stageWidth - _bootsPicker.width - 100;
+			_bootsPicker.y = 290;
+			//// Boots ///
+			
+			//// Left Arm///
+			_leftarmPicker.titleText.text = "Left Arm Picker";
+			_leftarmPicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changeleftarmColor);
+			_leftarmPicker.x = stage.stageWidth - _leftarmPicker.width - 100;
+			_leftarmPicker.y = 320;
+			//// Left Arm ///
+			
+			//// Left Hand///
+			_lefthandPicker.titleText.text = "Left Hand Picker";
+			_lefthandPicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changelefthandColor);
+			_lefthandPicker.x = stage.stageWidth - _lefthandPicker.width - 100;
+			_lefthandPicker.y = 350;
+			//// Left Hand ///
+			
+			//// Jeans///
+			_jeansPicker.titleText.text = "Jeans Picker";
+			_jeansPicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changejeansColor);
+			_jeansPicker.x = stage.stageWidth - _jeansPicker.width - 100;
+			_jeansPicker.y = 380;
+			//// Jeans ///
+			
+			//// Mask///
+			_blackmPicker.titleText.text = "Mask Picker";
+			_blackmPicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changeblackmColor);
+			_blackmPicker.x = stage.stageWidth - _blackmPicker.width - 100;
+			_blackmPicker.y = 410;
+			//// Mask ///
+			
+			//// Shirt///
+			_shirtPicker.titleText.text = "Shirt Picker";
+			_shirtPicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changeshirtColor);
+			_shirtPicker.x = stage.stageWidth - _shirtPicker.width - 100;
+			_shirtPicker.y = 440;
+			//// Shirt ///
+			
+			//// Center of Mask///
+			_centerofmaskPicker.titleText.text = "Center of Mask Picker";
+			_centerofmaskPicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changecenterofmaskColor);
+			_centerofmaskPicker.x = stage.stageWidth - _centerofmaskPicker.width - 100;
+			_centerofmaskPicker.y = 470;
+			//// Center of Mask ///
+			
+			//// Mouth///
+			_mouthPicker.titleText.text = "Mouth Picker";
+			_mouthPicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changemouthColor);
+			_mouthPicker.x = stage.stageWidth - _mouthPicker.width - 100;
+			_mouthPicker.y = 500;
+			//// Mouth ///
+			
+			////White eye///
+			_whiteeyePicker.titleText.text = "White Eye";
+			_whiteeyePicker.colorPicker.addEventListener(ColorPickerEvent.CHANGE, changewhiteeyeColor);
+			_whiteeyePicker.x = stage.stageWidth - _whiteeyePicker.width - 100;
+			_whiteeyePicker.y = 530;
+			//// White Eye ///
+			
+			
+			
+			
+			//display list
+			addChild(_robber);//
+			addChild(_hatPicker);
+			addChild(_hairPicker);
+			addChild(_bootsPicker);
+			addChild(_innereyePicker);
+			addChild(_headandneckPicker);
+			addChild(_rightarmPicker);
+			addChild(_righthandPicker);
+			addChild(_beltPicker);
+			addChild(_centerofbeltPicker);
+			addChild(_moneybagPicker);
+			addChild(_bootsPicker);
+			addChild(_leftarmPicker);
+			addChild(_lefthandPicker);
+			addChild(_jeansPicker);
+			addChild(_blackmPicker);
+			addChild(_shirtPicker);
+			addChild(_centerofmaskPicker);
+			addChild(_mouthPicker);
+			addChild(_whiteeyePicker);
+			addChild(_printBtn);
+		}
+		
+		private function printScene(event:MouseEvent):void
+		{
+			
+			
+			var printJob:PrintJob = new PrintJob();
+			
+			if(printJob.start()){
+				if(_robber.width > printJob.pageWidth){
+					//_robber.width = printJob.pageWidth;
+				}
+				
+				printJob.addPage(_robber);
+				printJob.send();
+			}
+			
+		}
+		
+		
+		private function changeHatColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.hat.fill, TRANSITION_SPEED, {tint:event.color});
+		}
+		
+		private function changeHairColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.hair.fill, TRANSITION_SPEED, {tint:event.color});
+		}	
+		
+		private function changeBootsColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.boots.fill, TRANSITION_SPEED, {tint:event.color});
+		}
+
+		private function changeinnereyeColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.innereye.fill, TRANSITION_SPEED, {tint:event.color});
+		}
+
+		private function changeheadandneckColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.headandneck.fill, TRANSITION_SPEED, {tint:event.color});
+		}
+
+
+		private function changerightarmColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.rightarm.fill, TRANSITION_SPEED, {tint:event.color});
+		}
+		
+		private function changerighthandColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.righthand.fill, TRANSITION_SPEED, {tint:event.color});
+		}
+	
+		private function changebeltColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.belt.fill, TRANSITION_SPEED, {tint:event.color});
+		}
+
+
+		private function changecenterofbeltColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.centerofbelt.fill, TRANSITION_SPEED, {tint:event.color});
+		}
+
+		private function changemoneybagColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.moneybag.fill, TRANSITION_SPEED, {tint:event.color});
+		}
+
+		private function changebootsColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.boots.fill, TRANSITION_SPEED, {tint:event.color});
+		}
+		
+		
+		private function changeleftarmColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.leftarm.fill, TRANSITION_SPEED, {tint:event.color});
+		}
+		
+		private function changelefthandColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.lefthand.fill, TRANSITION_SPEED, {tint:event.color});
+		}		
+		
+		private function changejeansColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.jeans.fill, TRANSITION_SPEED, {tint:event.color});
+		}		
+		
+		private function changeblackmColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.blackm.fill, TRANSITION_SPEED, {tint:event.color});
+		}		
+		
+		private function changeshirtColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.shirt.fill, TRANSITION_SPEED, {tint:event.color});
+		}	
+		
+		private function changecenterofmaskColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.centerofmask.fill, TRANSITION_SPEED, {tint:event.color});
+		}	
+		
+		private function changemouthColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.mouth.fill, TRANSITION_SPEED, {tint:event.color});
+		}	
+		
+		private function changewhiteeyeColor(event:ColorPickerEvent)
+		{
+			TweenLite.to(_robber.whiteeye.fill, TRANSITION_SPEED, {tint:event.color});
+		}	
+		
+		
+	}
+	
+	
+}
